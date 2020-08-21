@@ -4,5 +4,5 @@
 int main()
 {
 	Intro intro;
-	intro.Introduction();
+	User user = intro.Introduction();
 }

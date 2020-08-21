@@ -1,21 +1,16 @@
 #include "Intro.h"
 #include "User.h"
 #include "Writer.h"
+#include <regex>
 
 User Intro::Introduction()
 {
     std::string Name;
     std::string Password;
-
-    Writer::WriteInConsole("Initializing SeHaSy");
-    Writer::WriteInConsole("...\n", 300);
-    Writer::WriteInConsole("Initialized.");
-    Writer::DoubleLineBreak();
-
-    Writer::WriteInConsole("Establishing a secure connection");
-    Writer::WriteInConsole(".....\n", 500);
-    Writer::WriteInConsole("Secure connection establish");
-    Writer::DoubleLineBreak();
+    
+    Writer::WriteActionInConsole("Initializing SeHasy", "Initialized", 3, 300);
+    Writer::WriteActionInConsole("Looking for a secure connection", "Secure Connection Found!", 5, 500);
+    Writer::WriteActionInConsole("Conecting", "Sucess!\nSecure connection establish", 7, 200);
 
     Writer::WriteInConsole("Welcome to the Secret Hacking System!");
     Writer::DoubleLineBreak();
@@ -34,20 +29,13 @@ User Intro::Introduction()
         CreateUser(&Name, &Password);
     }
 
-    Writer::WriteInConsole("Connecting");
-    Writer::WriteInConsole(".....\n", 500);
-    Writer::WriteInConsole("Connected");
-
-    Writer::DoubleLineBreak();
-    Writer::WriteInConsole("Welcome back " + Name + "\n");
     return User(Name, Password);
 }
 
 void Intro::CreateUser(std::string* Name, std::string* Password)
 {
-    Writer::WriteInConsole("Executing user creation");
-    Writer::WriteInConsole("...", 100);
-    Writer::WriteInConsole("Introduce your username:\n");
+    Writer::WriteSimpleActionInConsole("Executing user creation", 3, 150);
+    Writer::WriteInConsole("\nIntroduce a new username:\n");
     std::string input;
     std::cin >> input;
     *Name = input;
@@ -63,7 +51,7 @@ void Intro::CreateUser(std::string* Name, std::string* Password)
             std::cout << std::endl;
             if (passInput.length() < 8)
             {
-                Writer::WriteInConsole("Password should be eight or more characters long\n");
+                Writer::WriteErrorInConsole("Password should be eight or more characters long", "001");
             }
         }
 
@@ -72,13 +60,16 @@ void Intro::CreateUser(std::string* Name, std::string* Password)
         std::cout << std::endl;
         if (passInput != repeat)
         {
-            Writer::WriteInConsole("The passwords doesn´t match\n");
+            Writer::WriteErrorInConsole("The passwords doesn't match", "002");
             passInput = "";
         }
     }
 
+    Writer::WriteActionInConsole("Creating", "Created!", 4, 200);
+
     *Password = passInput;
-    std::cout << std::endl;
+    Loging();
+    Writer::WriteInConsole("Welcome " + *Name + "!\n");
 }
 
 void Intro::LogInUser(std::string* Name, std::string* Password)
@@ -92,4 +83,13 @@ void Intro::LogInUser(std::string* Name, std::string* Password)
     std::cin >> input;
     *Password = input;
     std::cout << std::endl;
+
+    Loging();
+
+    Writer::WriteInConsole("Welcome back " + *Name + "!\n");
+}
+
+void Intro::Loging()
+{
+    Writer::WriteActionInConsole("Loging", "Logged", 5, 500);
 }

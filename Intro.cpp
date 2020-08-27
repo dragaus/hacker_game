@@ -1,6 +1,4 @@
 #include "Intro.h"
-#include "User.h"
-#include "Writer.h"
 #include <regex>
 
 User Intro::Introduction()
@@ -15,10 +13,8 @@ User Intro::Introduction()
     Writer::WriteInConsole("Welcome to the Secret Hacking System!");
     Writer::DoubleLineBreak();
 
-    Writer::WriteInConsole("Do You have a user? (Y/N)\n");
     std::string Answer;
-    std::cin >> Answer;
-    std::cout << std::endl;
+    Reader::SimpleInput("Do You have a user? (Y/N)", &Answer);
 
     if (tolower(Answer[0]) == 'y') 
     {
@@ -35,54 +31,40 @@ User Intro::Introduction()
 void Intro::CreateUser(std::string* Name, std::string* Password)
 {
     Writer::WriteSimpleActionInConsole("Executing user creation", 3, 150);
-    Writer::WriteInConsole("\nIntroduce a new username:\n");
-    std::string input;
-    std::cin >> input;
-    *Name = input;
-    std::cout << std::endl;
-    std::string passInput = "a";
-    std::string repeat = "b";
-    while (passInput != repeat)
+    Reader::SimpleInput("\nIntroduce a new username:", Name);
+
+    std::string PassInput = "a";
+    std::string Repeat = "b";
+    while (PassInput != Repeat)
     {
-        while (passInput.length() < 8)
+        while (PassInput.length() < 8)
         {
-            Writer::WriteInConsole("Please enter a new password:\n");
-            std::cin >> passInput;
-            std::cout << std::endl;
-            if (passInput.length() < 8)
+            Reader::SimpleInput("Please enter a new password:", &PassInput);
+            if (PassInput.length() < 8)
             {
                 Writer::WriteErrorInConsole("Password should be eight or more characters long", "001");
             }
         }
 
-        Writer::WriteInConsole("Please repeat your password:\n");
-        std::cin >> repeat;
-        std::cout << std::endl;
-        if (passInput != repeat)
+        Reader::SimpleInput("Please repeat ypur password:", &Repeat);
+        if (PassInput != Repeat)
         {
             Writer::WriteErrorInConsole("The passwords doesn't match", "002");
-            passInput = "";
+            PassInput = "";
         }
     }
 
     Writer::WriteActionInConsole("Creating", "Created!", 4, 200);
 
-    *Password = passInput;
+    *Password = PassInput;
     Loging();
     Writer::WriteInConsole("Welcome " + *Name + "!\n");
 }
 
 void Intro::LogInUser(std::string* Name, std::string* Password)
 {
-    Writer::WriteInConsole("Introduce your username:\n");
-    std::string input;
-    std::cin >> input;
-    *Name = input;
-    std::cout << std::endl;
-    Writer::WriteInConsole("Please enter your password:\n");
-    std::cin >> input;
-    *Password = input;
-    std::cout << std::endl;
+    Reader::SimpleInput("Introduce your Username:", Name);
+    Reader::SimpleInput("Please enter your password:", Password);
 
     Loging();
 

@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="hacker_game.cpp" />
     <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="Reader.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Intro.h" />
+    <ClInclude Include="Reader.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Writer.h" />
   </ItemGroup>

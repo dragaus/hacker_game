@@ -1,5 +1,8 @@
 #pragma once
 #include "User.h"
+#include "Intro.h"
+#include "Writer.h"
+#include "Reader.h"
 #include <iostream>
 
 class Intro

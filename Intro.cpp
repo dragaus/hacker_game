@@ -39,14 +39,14 @@ void Intro::CreateUser(std::string* Name, std::string* Password)
     {
         while (PassInput.length() < 8)
         {
-            Reader::SimpleInput("Please enter a new password:", &PassInput);
+            Reader::PasswordInput("Please enter a new password:", &PassInput);
             if (PassInput.length() < 8)
             {
                 Writer::WriteErrorInConsole("Password should be eight or more characters long", "001");
             }
         }
 
-        Reader::SimpleInput("Please repeat ypur password:", &Repeat);
+        Reader::PasswordInput("Please repeat your password:", &Repeat);
         if (PassInput != Repeat)
         {
             Writer::WriteErrorInConsole("The passwords doesn't match", "002");
@@ -64,7 +64,7 @@ void Intro::CreateUser(std::string* Name, std::string* Password)
 void Intro::LogInUser(std::string* Name, std::string* Password)
 {
     Reader::SimpleInput("Introduce your Username:", Name);
-    Reader::SimpleInput("Please enter your password:", Password);
+    Reader::PasswordInput("Please enter your password:", Password);
 
     Loging();
 

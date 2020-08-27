@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Intro.h";
+#include "Intro.h"
 
 int main()
 {

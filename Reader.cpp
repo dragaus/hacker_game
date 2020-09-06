@@ -61,10 +61,7 @@ void Reader::PasswordInput(std::string Message, std::string* Input, bool ShowAst
     const char BACKSPACE = 127;
     const char RETURN = 10;
 
-    std::string password;
-    unsigned char ch = 0;
-
-    while ((ch = getch()) != RETURN)
+    while ((ch = Getch()) != RETURN)
     {
         if (ch == BACKSPACE)
         {
@@ -100,14 +97,14 @@ void Reader::PasswordInput(std::string Message, std::string* Input, bool ShowAst
         int ch;
         struct termios t_old, t_new;
 
-        srd::tcgetattr(STDIN_FILENO, &t_old);
+        tcgetattr(STDIN_FILENO, &t_old);
         t_new = t_old;
         t_new.c_lflag &= ~(ICANON | ECHO);
-        std::tcsetattr(STDIN_FILENO, TCSANOW, &t_new);
+        tcsetattr(STDIN_FILENO, TCSANOW, &t_new);
 
         ch = getchar();
 
-        std::tcsetattr(STDIN_FILENO, TCSANOW, &t_old);
+        tcsetattr(STDIN_FILENO, TCSANOW, &t_old);
         return ch;
     }
 #endif
